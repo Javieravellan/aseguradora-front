@@ -1,0 +1,39 @@
+<div class="modal fade" id="formNuevoSeguro" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nuevo Cliente</h5>
+                <button type="button" #closeForm class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="myFormCliente!" (ngSubmit)="enviarFormulario()">
+                    <div class="mb-3">
+                        <label for="cedulaCliente" class="form-label">Cédula</label>
+                        <input formControlName="cedulaCliente" required type="text" class="form-control" id="cedulaCliente"
+                            placeholder="EJ: 0927845112">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombreCliente" class="form-label">Nombre</label>
+                        <input formControlName="nombreCliente" required type="text" class="form-control" id="nombreCliente"
+                            placeholder="EJ: Juan Pérez" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="telefono" class="form-label">Teléfono</label>
+                        <input formControlName="telefono" required type="number" class="form-control"
+                            id="telefono" placeholder="5939910458712" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="edad" class="form-label">Edad</label>
+                        <input formControlName="edad" required type="number" class="form-control"
+                            id="edad" placeholder="EJ: 25" />
+                    </div>
+                    <div class="mb-3">
+                        <input type="submit" id="btnEnviar" class="btn btn-primary" [value]="textButton" />
+                        &nbsp;
+                        <input type="reset" class="btn btn-secondary" value="Restablecer" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

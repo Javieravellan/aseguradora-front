@@ -1,0 +1,36 @@
+<div class="modal fade" id="formNuevoSeguro" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Nuevo seguro</h5>
+                <button type="button" #closeForm class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="myForm!" (ngSubmit)="enviarFormulario()">
+                    <div class="mb-3">
+                        <label for="codigo" class="form-label">Código</label>
+                        <input formControlName="codigoSeguro" required type="text" class="form-control" id="codigo" placeholder="EJ: S01">
+                    </div>
+                    <div class="mb-3">
+                        <label for="nombreSeguro" class="form-label">Nombre</label>
+                        <input formControlName="nombre" required type="text" class="form-control" id="nombreSeguro" placeholder="EJ: Seguro de vida..." />
+                    </div>
+                    <div class="mb-3">
+                        <label for="sumaAsegurada" class="form-label">Suma asegurada</label>
+                        <input formControlName="sumaAsegurada" required type="number" class="form-control" id="sumaAsegurada" placeholder="EJ: 25000.00" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="primaSeguro" class="form-label">Prima del seguro</label>
+                        <input formControlName="primaSeguro" required type="number" class="form-control" id="primaSeguro" placeholder="EJ: 5000.00" />
+                    </div>
+                    <div class="mb-3">
+                        <input type="submit" id="btnEnviar" class="btn btn-primary" 
+                            [value]="textButton" />
+                        &nbsp;
+                        <input type="reset" class="btn btn-secondary" value="Restablecer" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

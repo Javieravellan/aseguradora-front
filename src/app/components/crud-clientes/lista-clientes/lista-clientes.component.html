@@ -1,0 +1,36 @@
+<br>
+<div class="card">
+    <div class="card-header d-flex justify-content-between">
+        <h3 class="card-title">Lista de clientes</h3>
+        <a class="btn btn-info" (click)="abrirForm()" #btnNuevo href="#" data-bs-toggle="modal"
+            data-bs-target="#formNuevoSeguro">Agregar nuevo</a>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Cédula</th>
+                    <th>Nombre cliente</th>
+                    <th>Teléfono</th>
+                    <th>Edad</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of listaClientes">
+                    <td>{{cliente.cedulaCliente}}</td>
+                    <td>{{cliente.nombreCliente}}</td>
+                    <td>{{cliente.telefono}}</td>
+                    <td>{{cliente.edad}}</td>
+                    <td>
+                        <a class="btn btn-primary" (click)="abrirFormularioParaActualizar(cliente)"
+                            href="javascript:void(0)"><i class="bi bi-pencil-fill"></i></a>&nbsp;
+                        <a class="btn btn-danger" (click)="eliminarCliente(cliente.cedulaCliente!)"
+                            href="javascript:void(0)"><i class="bi bi-trash-fill"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<app-agregar-nuevo-cliente></app-agregar-nuevo-cliente>

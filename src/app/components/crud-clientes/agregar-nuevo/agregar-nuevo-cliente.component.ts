@@ -1,9 +1,11 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { Cliente } from 'src/app/models/Cliente';
+import { Cliente, ClientesSeguros } from 'src/app/models/Cliente';
+import { Seguro } from 'src/app/models/Seguro';
 import { ClientesService } from 'src/app/services/clientes.service';
 import { MyRxJSService } from 'src/app/services/my-rx-js.service';
+import { SegurosService } from 'src/app/services/seguros.service';
 
 @Component({
   selector: 'app-agregar-nuevo-cliente',
@@ -14,6 +16,7 @@ export class AgregarNuevoClienteComponent implements OnInit, OnDestroy {
 
   myFormCliente?: FormGroup;
   clienteActual?: Cliente;
+  esActualizar: boolean = false
 
   susbcriptorActualizar?: Subscription;
   susbcriptorAbrirForm?: Subscription;
@@ -36,6 +39,7 @@ export class AgregarNuevoClienteComponent implements OnInit, OnDestroy {
     this.susbcriptorAbrirForm = this.rxjs.getSubject<string>("abrirForm")
       .subscribe((event) => {
         this.textButton = event
+        this.esActualizar = false
         this.myFormCliente?.get("cedulaCliente")?.enable();
       });
   }
@@ -45,6 +49,7 @@ export class AgregarNuevoClienteComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.susbcriptorActualizar?.unsubscribe();
+    this.susbcriptorAbrirForm?.unsubscribe();
   }
 
   // add new secure
@@ -57,7 +62,8 @@ export class AgregarNuevoClienteComponent implements OnInit, OnDestroy {
     if (this.myFormCliente!.valid) {
       let nuevoCliente = this.myFormCliente!.value as Cliente;
       nuevoCliente.clientesSeguros = [];
-
+      nuevoCliente.telefono = nuevoCliente.telefono?.toString();
+      
       this.service.crearCliente(nuevoCliente)
         .subscribe({
           next: data => {
@@ -79,10 +85,20 @@ export class AgregarNuevoClienteComponent implements OnInit, OnDestroy {
     if (this.myFormCliente!.valid) {
       this.myFormCliente?.get("cedulaCliente")?.enable();
       let nuevoCliente = this.myFormCliente!.value as Cliente;
-      nuevoCliente.clientesSeguros = [];
+      // ahorita es el cliente actual y tiene todo lo que tiene
+      nuevoCliente.telefono = nuevoCliente.telefono?.toString();
+      
+      this.clienteActual!.cedulaCliente = nuevoCliente.cedulaCliente
+      this.clienteActual!.nombreCliente = nuevoCliente.nombreCliente
+      this.clienteActual!.telefono = nuevoCliente.telefono
+      this.clienteActual!.edad = nuevoCliente.edad
+      this.clienteActual!.clientesSeguros = (!this.clienteActual?.clientesSeguros) ? [] : 
+        this.clienteActual?.clientesSeguros;
+
+      console.log(this.clienteActual);
       this.myFormCliente?.get("cedulaCliente")?.enable();
 
-      this.service.actualizarCliente(nuevoCliente)
+      this.service.actualizarCliente(this.clienteActual!)
         .subscribe({
           next: (data: Cliente) => {
             this.clienteActual = data
@@ -107,14 +123,15 @@ export class AgregarNuevoClienteComponent implements OnInit, OnDestroy {
 
   private mostrarSeguroEnFormulario(cliente: Cliente, form: FormGroup) {
     this.textButton = "Actualizar"
-
+    this.esActualizar = true
     if (cliente) {
-      this.clienteActual = cliente;
+      this.clienteActual = cliente; // solo en actualizar
+      console.log(this.clienteActual);
       form.get("cedulaCliente")?.disable();
       form.setValue({
         cedulaCliente: cliente.cedulaCliente,
         nombreCliente: cliente.nombreCliente,
-        telefono: cliente.telefono,
+        telefono: cliente.telefono?.toString(),
         edad: cliente.edad,
       });
     }

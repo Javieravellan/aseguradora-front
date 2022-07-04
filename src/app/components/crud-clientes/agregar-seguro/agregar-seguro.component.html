@@ -1,0 +1,20 @@
+<div class="modal fade" id="formAsignarSeguro" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Asignar un seguro a <span>{{nombreCliente!}}</span>  </h5>
+                <a class="btn-close" #cerrar data-bs-target="#formAsignarSeguro" data-bs-dismiss="modal" aria-label="Close"></a>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <label for="">Seguros disponibles</label>
+                    <select (change)="asignarSeguro($event)" class="form-control">
+                        <option value="" hidden selected>Seleccione uno</option>
+                        <option *ngFor="let seguro of segurosDisponibles" value={{seguro.codigoSeguro}}>
+                            {{seguro.nombre}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -35,4 +35,7 @@ export class SegurosService {
   eliminarSeguro(codigo: string) {
     return this.http.delete(`${this.UrlApi}/${codigo}`);
   }
+  buscarSegurosPorCodigoSeguro(codigo: string) {
+    return this.http.get(`${this.UrlApi}/buscar/${codigo}`);
+  }
 }

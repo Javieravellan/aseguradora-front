@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cliente } from '../models/Cliente';
@@ -27,6 +27,12 @@ export class ClientesService {
     });
   }
 
+  crearClientesDesdeArchivo(file: File): Observable<Cliente[]> {
+    let form = new FormData()
+    form.append("file", file);
+    return this.http.post<Cliente[]>(`${this.UrlApi}/upload-file`, form)
+  }
+
   actualizarCliente(cliente: Cliente): Observable<Cliente> {
     return this.http.put<Cliente>(`${this.UrlApi}`, cliente);
   }
@@ -34,4 +40,16 @@ export class ClientesService {
   eliminarCliente(cedula: string) {
     return this.http.delete(`${this.UrlApi}/${cedula}`);
   }
+
+  asignarSeguro(codigoSeguro:string, cedula:string) {
+    let params = new HttpParams()
+    params.set("codigoSeguro", codigoSeguro)
+    params.set("cedula", cedula)
+    return this.http.get(`${this.UrlApi}/asignar?codigoSeguro=${codigoSeguro}&cedula=${cedula}`);
+  }
+
+  buscarSegurosPorCedulaCliente(cedula:string) {
+    return this.http.get(`${this.UrlApi}/buscar/${cedula}`);
+  }
+  
 }

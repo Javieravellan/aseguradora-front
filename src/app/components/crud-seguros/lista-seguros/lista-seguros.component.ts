@@ -22,9 +22,11 @@ export class ListaSegurosComponent implements OnInit, OnDestroy {
     private service: SegurosService,
     private rxjs: MyRxJSService,
   ) {  
+    this.obtenerTodosLosSeguros();
     this.susbcriptorNuevo = this.rxjs.getSubject<Seguro>("nuevoSeguro").subscribe(
       (seguro: Seguro) => {
-        let index = this.segurosDisponibles?.findIndex(s => s.codigoSeguro = seguro.codigoSeguro);
+        let index = this.segurosDisponibles?.findIndex(s => s.codigoSeguro == seguro.codigoSeguro);
+        console.log(index);
         if (index != -1) this.segurosDisponibles![index!] = seguro;
         else this.segurosDisponibles?.push(seguro)
       }
@@ -32,7 +34,6 @@ export class ListaSegurosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.obtenerTodosLosSeguros();
   }
 
   ngOnDestroy(): void {

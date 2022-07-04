@@ -1,0 +1,64 @@
+<br>
+<div class="">
+    <h3>Listar seguros por cédula del cliente</h3>
+    <form class="col-md-6" (ngSubmit)="buscar()" action="">
+        <div class="mb-3">
+            <label for="">Cédula: </label>
+            <input [(ngModel)]="cuadroBusqueda" name="cuadroBusqueda" type="text" class="form-control" id="" placeholder="Cedula del cliente. "/>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Buscar" />
+    </form>
+    <br>
+    <div *ngIf="segurosDeClienteActual!">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nombre</th>
+                    <th>Suma asegurada</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let seg of segurosDeClienteActual!">
+                    <td>{{seg.codigoSeguro}}</td>
+                    <td>{{seg.nombre}}</td>
+                    <td>{{seg.sumaAsegurada}}</td>
+                    <td>{{seg.clientesSeguros[0].fechaAlta | date}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<br>
+<div class="">
+    <h3>Listar clientes por código de seguro</h3>
+    <form class="col-md-6" (ngSubmit)="buscarClientesPorCodigoSeguro()" action="">
+        <div class="mb-3">
+            <label for="">Código del seguro: </label>
+            <input [(ngModel)]="busquedaPorCodigoSeguro" name="busquedaPorCodigoSeguro" type="text" class="form-control"placeholder="Código de seguro..." />
+        </div>
+        <input class="btn btn-primary" type="submit" value="Buscar" />
+    </form>
+    <br>
+    <div *ngIf="clientesPorSeguro!">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Cédula</th>
+                    <th>Nombre cliente</th>
+                    <th>Teléfono</th>
+                    <th>Edad</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cli of clientesPorSeguro!">
+                    <td>{{cli.cedulaCliente}}</td>
+                    <td>{{cli.nombreCliente}}</td>
+                    <td>{{cli.telefono}}</td>
+                    <td>{{cli.edad}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

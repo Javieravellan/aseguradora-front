@@ -1,0 +1,12 @@
+instrucciones:
+CLONAR EL REPOSITORIO DE ASEGURADORA(BACKEND). Está hecho con .net core 6 Web API MVC y visual studio 2022.
+
+1. importar la base de datos a su SQL Server. El archivo está en el repo del frontend es     un  ---> aseguradoraDB.bacpac
+2. modificar la cadena de conexión del SQL en appsettings.json
+3. ejecutar la aplicación.
+
+
+CLONAR EL REPOSITORIO DE ASEGURADORA-FRONT. Está desarrollado en Angular 14, bootstrap 5
+1. ir a la carpeta del proyecto
+2. ejecutar ng serve -o. Tiene que estar en ejecución el backend obviamente.
+3. comience a probar la aplicación. Los dos CRUD de seguros y clientes y la página principal para las búsquedas.

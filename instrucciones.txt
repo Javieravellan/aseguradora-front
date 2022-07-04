@@ -1,12 +1,26 @@
 instrucciones:
-CLONAR EL REPOSITORIO DE ASEGURADORA(BACKEND). Est· hecho con .net core 6 Web API MVC y visual studio 2022.
+CLONAR EL REPOSITORIO DE ASEGURADORA(BACKEND). Est√° hecho con .net core 6 Web API MVC y visual studio 2022.
 
-1. importar la base de datos a su SQL Server. El archivo est· en el repo del frontend es     un  ---> aseguradoraDB.bacpac
-2. modificar la cadena de conexiÛn del SQL en appsettings.json
-3. ejecutar la aplicaciÛn.
+1. importar la base de datos a su MS SQL Server Management studio 2018. El archivo est√° en el repo del frontend es     un  ---> aseguradoraDB.bacpac
+    la importaci√≥n del archivo de base de datos se hace: 
+    abre el sql management, 
+    click derecho sobre carpeta 'bases de datos', 
+    seleccionar la opcion <<Import Data-tier applications>>, 
+    click en siguiente,
+    seleccionar el archivo "carpetaGitCloneAseguradoraFrontent/aseguradora-front/aseguradoraDB.bacpac,
+    SIGUIENTE,
+    poner nombre a la base de datos, siguiente,
+    Resumen de las operaciones, 
+    Finalizar
+    con eso ya habr√° importado la base de datos.
+    
+2. modificar la cadena de conexi√≥n del SQL en appsettings.json
+3. ejecutar la aplicaci√≥n.
 
 
-CLONAR EL REPOSITORIO DE ASEGURADORA-FRONT. Est· desarrollado en Angular 14, bootstrap 5
+CLONAR EL REPOSITORIO DE ASEGURADORA-FRONT. Est√° desarrollado en Angular 14, bootstrap 5
 1. ir a la carpeta del proyecto
-2. ejecutar ng serve -o. Tiene que estar en ejecuciÛn el backend obviamente.
-3. comience a probar la aplicaciÛn. Los dos CRUD de seguros y clientes y la p·gina principal para las b˙squedas.
+2. ejecutar ng serve -o. Tiene que estar en ejecuci√≥n el backend obviamente.
+3. comience a probar la aplicaci√≥n. Los dos CRUD de seguros y clientes y la p√°gina principal para las b√∫squedas.
+
+PD: No alcanc√© a subirla a AWS :( esa era la intenci√≥n. Iba a Dockerizar el proyecto en AWS EC2.
